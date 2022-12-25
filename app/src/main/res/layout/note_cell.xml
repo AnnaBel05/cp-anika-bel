@@ -15,7 +15,7 @@
         android:textStyle="bold"
         android:maxLines="1"
         android:textColor="@color/blue"
-        android:textSize="25sp">
+        android:textSize="20sp">
     </TextView>
 
     <TextView
@@ -26,7 +26,7 @@
         android:maxLines="1"
         android:layout_marginTop="5dp"
         android:textColor="@color/blue"
-        android:textSize="20sp">
+        android:textSize="15sp">
     </TextView>
 
 </LinearLayout>

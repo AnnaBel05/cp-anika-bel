@@ -18,8 +18,8 @@ import java.util.Currency;
 public class SQLiteManager extends SQLiteOpenHelper {
     private static SQLiteManager sqLiteManager;
 
-    private static final String DATABASE_NAME = "CP_DB_2";
-    private static final int DATABASE_VERSION = 2;
+    private static final String DATABASE_NAME = "CP_DB_4";
+    private static final int DATABASE_VERSION = 1;
     private static final String TABLE_NAME = "event";
     private static final String TABLE_NAME_2= "notes";
     private static final String COUNTER = "Counter";
@@ -31,7 +31,7 @@ public class SQLiteManager extends SQLiteOpenHelper {
 
     private static final String ID_FIELD_2 = "id";
     private static final String NAME_FIELD_2 = "name";
-    private static final String TEXT_FIELD = "text";
+    private static final String TEXT_FIELD = "textF";
 
     private static DateTimeFormatter dateFormatter;
     private static DateTimeFormatter timeFormatter;
@@ -74,7 +74,7 @@ public class SQLiteManager extends SQLiteOpenHelper {
                 .append(TABLE_NAME_2)
                 .append(" ( ")
                 .append(COUNTER)
-                .append(" INTEGER PRIMARY KEY AUTOINCREMENT ")
+                .append(" INTEGER PRIMARY KEY AUTOINCREMENT, ")
                 .append(ID_FIELD_2)
                 .append(" INT, ")
                 .append(NAME_FIELD_2)
@@ -106,16 +106,15 @@ public class SQLiteManager extends SQLiteOpenHelper {
         sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
     }
 
-    public void addNoteToDB(Event event) {
+    public void addNoteToDB(Note note) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(ID_FIELD, event.getId());
-        contentValues.put(NAME_FIELD, event.getName());
-        contentValues.put(DATE_FIELD, getStringFromDate(event.getDate()));
-        contentValues.put(TIME_FIELD, getStringFromTime(event.getTime()));
+        contentValues.put(ID_FIELD, note.getId());
+        contentValues.put(NAME_FIELD_2, note.getHeadline());
+        contentValues.put(TEXT_FIELD, note.getMaintext());
 
-        sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
+        sqLiteDatabase.insert(TABLE_NAME_2, null, contentValues);
     }
 
     public void populateEventArray() {
@@ -140,6 +139,24 @@ public class SQLiteManager extends SQLiteOpenHelper {
         }
     }
 
+    public void populateNoteListArray() {
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_NAME_2, null);) {
+            if(result.getCount() != 0) {
+                while (result.moveToNext()) {
+                    int id = result.getInt(1);
+                    String headline = result.getString(2);
+                    String maintext = result.getString(3);
+
+                    Note note = new Note(id,headline,maintext);
+                    Note.noteArrayList.add(note);
+
+                }
+            }
+        }
+
+    }
+
     public void updateEventInDB(Event event) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -149,6 +166,16 @@ public class SQLiteManager extends SQLiteOpenHelper {
         contentValues.put(TIME_FIELD, getStringFromTime(event.getTime()));
 
         sqLiteDatabase.update(TABLE_NAME, contentValues, ID_FIELD + "=?", new String[]{String.valueOf(event.getId())});
+    }
+
+    public void updateNoteInDB(Note note) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(ID_FIELD_2, note.getId());
+        contentValues.put(NAME_FIELD_2, note.getHeadline());
+        contentValues.put(TEXT_FIELD, note.getMaintext());
+
+        sqLiteDatabase.update(TABLE_NAME_2, contentValues, ID_FIELD_2 + "=?", new String[]{String.valueOf(note.getId())});
     }
 
     private String getStringFromDate(LocalDate date) {

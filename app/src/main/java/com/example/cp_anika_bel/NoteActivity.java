@@ -19,6 +19,12 @@ public class NoteActivity extends AppCompatActivity {
         setNoteAdapter();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setNoteAdapter();
+    }
+
     private void setNoteAdapter() {
         NoteAdapter noteAdapter = new NoteAdapter(getApplicationContext(), Note.noteArrayList);
         noteListView.setAdapter(noteAdapter);
@@ -31,8 +37,10 @@ public class NoteActivity extends AppCompatActivity {
 
     public void newNote(View view) {
         Intent newNoteIntent = new Intent(this,NoteDetailActivity.class);
+        startActivity(newNoteIntent);
     }
 
     public void returnToMainActivity(View view) {
+        finish();
     }
 }

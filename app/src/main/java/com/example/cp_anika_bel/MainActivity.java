@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
     private void loadFromDBToMemory() {
         SQLiteManager sqLiteManager = SQLiteManager.instanceOfDatabase(this);
         sqLiteManager.populateEventArray();
+        sqLiteManager.populateNoteListArray();
     }
 
     private void initWidgets() {
@@ -90,5 +91,9 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
 
     public void weeklyAction(View view) {
         startActivity(new Intent(this, WeekViewActivity.class));
+    }
+
+    public void noteAction(View view) {
+        startActivity(new Intent(this,NoteActivity.class));
     }
 }

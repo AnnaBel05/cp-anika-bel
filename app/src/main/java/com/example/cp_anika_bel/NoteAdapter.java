@@ -21,6 +21,7 @@ public class NoteAdapter extends ArrayAdapter<Note> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         Note note = getItem(position);
+
         if(convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.note_cell, parent, false);
         }
@@ -30,9 +31,6 @@ public class NoteAdapter extends ArrayAdapter<Note> {
 
         headline.setText(note.getHeadline());
         maintext.setText(note.getMaintext());
-
-
         return convertView;
-
     }
 }
