@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">cp-anika-bel</string>
+    <string name="Name">Name:</string>
+    <string name="Date">Date</string>
+    <string name="Time">Time</string>
+    <string name="event">Event</string>
+    <string name="save">SAVE</string>
+</resources>
