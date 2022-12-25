@@ -5,4 +5,12 @@
     <string name="Time">Time</string>
     <string name="event">Event</string>
     <string name="save">SAVE</string>
+    <string name="plus">+</string>
+    <string name="back"><![CDATA[<]]></string>
+    <string name="notes">NOTES</string>
+    <string name="advices">ADVICES</string>
+    <string name="saveNote">SAVE</string>
+    <string name="headline">Headline</string>
+    <string name="maintext">maintext</string>
+    <string name="main_text">Main text</string>
 </resources>

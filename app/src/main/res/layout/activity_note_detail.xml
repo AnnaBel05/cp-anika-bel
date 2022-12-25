@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NoteDetailActivity"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?actionBarSize"
+        android:theme="?actionBarTheme"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/advices"
+            android:textSize="35sp"
+            android:textColor="@color/blue"
+            android:textStyle="bold"
+            android:layout_gravity="center">
+        </TextView>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/saveNote"
+            android:textSize="35sp"
+            android:background="@color/white"
+            android:textColor="@color/blue"
+            android:textStyle="bold"
+            android:layout_gravity="end"
+            android:onClick="saveNote">
+        </Button>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/back"
+            android:textSize="35sp"
+            android:background="@color/white"
+            android:textColor="@color/blue"
+            android:textStyle="bold"
+            android:onClick="returnToMainActivity">
+        </Button>
+    </androidx.appcompat.widget.Toolbar>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/headline"
+        android:textSize="25sp"
+        android:background="@color/white"
+        android:textColor="@color/blue"
+        android:textStyle="bold"
+        android:layout_gravity="center">
+    </TextView>
+
+    <EditText
+        android:id="@+id/headlineET"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:maxLines="1"
+        android:background="@color/white"
+        android:textColor="@color/blue"
+        android:autofillHints="Enter your headline"
+        android:layout_gravity="center"
+        android:inputType="text"
+        tools:ignore="LabelFor">
+    </EditText>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/main_text"
+        android:textSize="25sp"
+        android:background="@color/white"
+        android:textColor="@color/blue"
+        android:textStyle="bold"
+        android:layout_gravity="center">
+    </TextView>
+
+    <EditText
+        android:id="@+id/maintextET"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:maxLines="5"
+        android:background="@color/white"
+        android:textColor="@color/blue"
+        android:autofillHints=""
+        android:layout_gravity="center"
+        android:inputType="text"
+        tools:ignore="LabelFor">
+    </EditText>
+
+</LinearLayout>

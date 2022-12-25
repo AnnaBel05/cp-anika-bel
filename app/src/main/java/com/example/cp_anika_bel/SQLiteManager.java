@@ -21,12 +21,17 @@ public class SQLiteManager extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "CP_DB_2";
     private static final int DATABASE_VERSION = 2;
     private static final String TABLE_NAME = "event";
+    private static final String TABLE_NAME_2= "notes";
     private static final String COUNTER = "Counter";
 
     private static final String ID_FIELD = "id";
     private static final String NAME_FIELD = "name";
     private static final String DATE_FIELD = "date";
     private static final String TIME_FIELD = "time";
+
+    private static final String ID_FIELD_2 = "id";
+    private static final String NAME_FIELD_2 = "name";
+    private static final String TEXT_FIELD = "text";
 
     private static DateTimeFormatter dateFormatter;
     private static DateTimeFormatter timeFormatter;
@@ -62,6 +67,21 @@ public class SQLiteManager extends SQLiteOpenHelper {
                 .append(TIME_FIELD)
                 .append(" TIME ) ");
         sqLiteDatabase.execSQL(sql.toString());
+
+        StringBuilder sql2;
+        sql2 = new StringBuilder()
+                .append(" CREATE TABLE ")
+                .append(TABLE_NAME_2)
+                .append(" ( ")
+                .append(COUNTER)
+                .append(" INTEGER PRIMARY KEY AUTOINCREMENT ")
+                .append(ID_FIELD_2)
+                .append(" INT, ")
+                .append(NAME_FIELD_2)
+                .append(" TEXT, ")
+                .append(TEXT_FIELD)
+                .append(" TEXT) ");
+        sqLiteDatabase.execSQL(sql2.toString());
     }
 
     @Override
@@ -75,6 +95,18 @@ public class SQLiteManager extends SQLiteOpenHelper {
     }
 
     public void addEventToDB(Event event) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(ID_FIELD, event.getId());
+        contentValues.put(NAME_FIELD, event.getName());
+        contentValues.put(DATE_FIELD, getStringFromDate(event.getDate()));
+        contentValues.put(TIME_FIELD, getStringFromTime(event.getTime()));
+
+        sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
+    }
+
+    public void addNoteToDB(Event event) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
